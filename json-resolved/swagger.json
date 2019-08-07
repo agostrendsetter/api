@@ -1,0 +1,105 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : " simple post",
+    "description" : "this is just a simple post",
+    "version" : "1.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/mxsunderstxxd/testPost/0.1",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "paths" : {
+    "/product" : {
+      "get" : {
+        "description" : "returns the product posted",
+        "parameters" : [ {
+          "name" : "apiKey",
+          "in" : "header",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "product_name",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a json product object",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/product"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "parameters" : [ {
+          "name" : "apiKey",
+          "in" : "header",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "json product object",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/product"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "product posted"
+          },
+          "400" : {
+            "description" : "invalid apiKey"
+          },
+          "401" : {
+            "description" : "invalid input parameters"
+          },
+          "402" : {
+            "description" : "input product_name"
+          },
+          "403" : {
+            "description" : "input Product_color"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "product" : {
+        "required" : [ "Product_colour", "product_name" ],
+        "type" : "object",
+        "properties" : {
+          "product_name" : {
+            "type" : "string"
+          },
+          "Product_color" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
