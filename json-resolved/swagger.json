@@ -12,11 +12,13 @@
   "paths" : {
     "/product" : {
       "get" : {
-        "description" : "returns the product posted",
+        "summary" : "returns the product posted",
+        "description" : "returns the product posted by product_name",
+        "operationId" : "getProductPosted",
         "parameters" : [ {
           "name" : "apiKey",
           "in" : "header",
-          "required" : false,
+          "required" : true,
           "style" : "simple",
           "explode" : false,
           "schema" : {
@@ -42,14 +44,22 @@
                 }
               }
             }
+          },
+          "400" : {
+            "description" : "ERROR 400"
           }
-        }
+        },
+        "servers" : [ {
+          "url" : "https://api.agos.website"
+        }, {
+          "url" : "https://virtserver.swaggerhub.com/mxsunderstxxd/testPost/0.1"
+        } ]
       },
       "post" : {
         "parameters" : [ {
           "name" : "apiKey",
           "in" : "header",
-          "required" : false,
+          "required" : true,
           "style" : "simple",
           "explode" : false,
           "schema" : {
@@ -59,7 +69,7 @@
         "requestBody" : {
           "description" : "json product object",
           "content" : {
-            "application/json" : {
+            "application/x-www-form-urlencoded" : {
               "schema" : {
                 "$ref" : "#/components/schemas/product"
               }
@@ -68,7 +78,16 @@
         },
         "responses" : {
           "200" : {
-            "description" : "product posted"
+            "description" : "response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string",
+                  "example" : "product posted",
+                  "enum" : [ "product posted" ]
+                }
+              }
+            }
           },
           "400" : {
             "description" : "invalid apiKey"
@@ -83,7 +102,12 @@
             "description" : "input Product_color"
           }
         }
-      }
+      },
+      "servers" : [ {
+        "url" : "https://api.agos.website"
+      }, {
+        "url" : "https://virtserver.swaggerhub.com/mxsunderstxxd/testPost/0.1"
+      } ]
     }
   },
   "components" : {
@@ -93,10 +117,12 @@
         "type" : "object",
         "properties" : {
           "product_name" : {
-            "type" : "string"
+            "type" : "string",
+            "example" : "nike"
           },
           "Product_color" : {
-            "type" : "string"
+            "type" : "string",
+            "example" : "blue"
           }
         }
       }
